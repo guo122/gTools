@@ -1,0 +1,10 @@
+*.DS_Store
+*.swp
+*.tmp
+*.x
+*.x.c
+bin
+build
+build*
+*.pro.user
+GTools/Info.plist

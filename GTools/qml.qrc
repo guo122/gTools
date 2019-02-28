@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>GBox/TextButton.qml</file>
+        <file>GBox/TextButtonNoDouble.qml</file>
+        <file>Bar.qml</file>
+        <file>LauncherList.qml</file>
+        <file>SimpleLauncherDelegate.qml</file>
+        <file>GTRandomListAdd.qml</file>
+        <file>GTRandomListData.qml</file>
+        <file>GTRandomListList.qml</file>
+        <file>GBox/GCombo.qml</file>
+        <file>GBox/GComboButton.qml</file>
+        <file>GBox/OriComplexComboBox.qml</file>
+        <file>GBox/OriComplexComboBoxButton.qml</file>
+    </qresource>
+</RCC>
