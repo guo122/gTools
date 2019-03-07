@@ -63,6 +63,10 @@ void GTPRandomList::GetKindList(QStringList &list_)
 void GTPRandomList::GetNameList(const QString &kind_, QStringList &list_)
 {
     GToolsM::Instance()->GetRandomListByKind(kind_, list_);
+    for (int i = 0; i < list_.size(); ++i)
+    {
+        list_[i] = QString::number(i + 1) + ": " + list_[i];
+    }
 }
 
 bool GTPRandomList::InitRandomList(const QString &kind_, const int &mode_)
