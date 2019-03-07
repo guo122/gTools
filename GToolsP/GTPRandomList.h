@@ -14,6 +14,31 @@
 
 class GTPRandomList
 {
+    struct AutoRandomList
+    {
+        AutoRandomList(const int &num_, const bool &unlimit_ = false)
+            : _cur(-1)
+            , _unlimit(unlimit_)
+        {
+            init(num_);
+        }
+        AutoRandomList()
+            : _cur(-1), _unlimit(false) {}
+
+        void init(const int &num_, const bool &unlimit_ = false);
+        void clear();
+        int next();
+        bool empty();
+
+        int getProgress();
+        int getIndex();
+
+        QVector<int> _list;
+        int _cur;
+        bool _unlimit;
+    };
+    typedef std::shared_ptr<AutoRandomList> AutoRandomListPtr;
+
 public:
     static GTPRandomList * Instance();
 
@@ -28,8 +53,12 @@ public:
     // mode 1: rand; 2: plan
     bool InitRandomList(const QString &kind_, const int &mode_);
     QString RandomData(const bool &forceRand = false);
+    QString HomepageRandom();
     int RandomDataFontSize();
     int RandomDataProgress();
+
+private:
+    static int _StaticSeed;
 
 private:
     struct Impl;

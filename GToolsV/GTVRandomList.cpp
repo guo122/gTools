@@ -20,7 +20,7 @@ QString GTVRandomList::getDescription(const QString &name_)
     QString Result = "";
     if (name_ == "Random")
     {
-        Result = GTPRandomList::Instance()->RandomData(true);
+        Result = GTPRandomList::Instance()->HomepageRandom();
     }
     return Result;
 }

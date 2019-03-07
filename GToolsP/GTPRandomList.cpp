@@ -11,18 +11,17 @@
 
 #include "GTPRandomList.h"
 
+int GTPRandomList::_StaticSeed = rand();
+
 struct GTPRandomList::Impl
 {
     Impl()
-        : _lastSeed(0)
-        , _lastI(-1)
-        , _lastRandom("")
+        : _lastRandom("")
     {}
 
-    int _lastSeed;
-    int _lastI;
+    AutoRandomList _planAuto;
+    AutoRandomList _homepageAuto;
     QString _lastRandom;
-    QVector<int> _randomMap;
     QStringList _lastStringList;
 };
 
@@ -70,35 +69,18 @@ bool GTPRandomList::InitRandomList(const QString &kind_, const int &mode_)
 {
     bool Result = false;
     _Impl->_lastStringList.clear();
-    _Impl->_lastI = -1;
-    _Impl->_randomMap.clear();
     if (GToolsM::Instance()->GetRandomListByKind(kind_, _Impl->_lastStringList))
     {
         Result = true;
-        if (mode_ == 2)
+        if (mode_ == 1)
         {
-            _Impl->_lastI = 0;
-            _Impl->_randomMap = QVector<int>(_Impl->_lastStringList.size(), -1);
-            for (int i = 0; i < _Impl->_randomMap.size(); ++i)
-            {
-                srand(int(time(nullptr)) + _Impl->_lastSeed);
-                // 生成randMap
-                _Impl->_lastSeed = rand() % _Impl->_randomMap.size();
-
-                if (_Impl->_lastSeed >= 0 && _Impl->_lastSeed < _Impl->_randomMap.size())
-                {
-                    while (_Impl->_randomMap[_Impl->_lastSeed] != -1)
-                    {
-                        _Impl->_lastSeed++;
-                        if (_Impl->_lastSeed == _Impl->_randomMap.size())
-                        {
-                            _Impl->_lastSeed = 0;
-                        }
-                    }
-                    _Impl->_randomMap[_Impl->_lastSeed] = i;
-                }
-            }
+            _Impl->_planAuto.clear();
         }
+        else
+        {
+            _Impl->_planAuto.init(_Impl->_lastStringList.size(), true);
+        }
+        _Impl->_homepageAuto.init(_Impl->_lastStringList.size(), true);
     }
     return Result;
 }
@@ -106,34 +88,45 @@ bool GTPRandomList::InitRandomList(const QString &kind_, const int &mode_)
 QString GTPRandomList::RandomData(const bool &forceRand)
 {
     QString Result = _Impl->_lastRandom;
-    if (_Impl->_lastI != -1 && forceRand != true)
+    if (!_Impl->_planAuto.empty() && forceRand != true)
     {
-        int i;
-        if (_Impl->_lastI >=0 && _Impl->_lastI < _Impl->_randomMap.size())
+        int i = _Impl->_planAuto.next();
+        if (i >=0 && i < _Impl->_lastStringList.size())
         {
-            i = _Impl->_randomMap[_Impl->_lastI];
-            if (i >= 0 && i < _Impl->_lastStringList.size())
-            {
-                Result = _Impl->_lastStringList[i];
-                _Impl->_lastRandom = Result;
-                _Impl->_lastI++;
-            }
+            Result = _Impl->_lastStringList[i];
+            _Impl->_lastRandom = Result;
         }
     }
     else
     {
         if (_Impl->_lastStringList.size() > 0)
         {
-            srand(int(time(nullptr)) + _Impl->_lastSeed);
-            _Impl->_lastSeed = rand() % _Impl->_lastStringList.size();
-            if (_Impl->_lastSeed >= 0 && _Impl->_lastSeed < _Impl->_lastStringList.size())
+            int curRand = 0;
+            srand(int(time(nullptr)) + _StaticSeed);
+            curRand = _StaticSeed = rand();
+            curRand %= _Impl->_lastStringList.size();
+            if (curRand >= 0 && curRand < _Impl->_lastStringList.size())
             {
-                Result = _Impl->_lastStringList[_Impl->_lastSeed];
+                Result = _Impl->_lastStringList[curRand];
                 if (!forceRand)
                 {
                     _Impl->_lastRandom = Result;
                 }
             }
+        }
+    }
+    return Result;
+}
+
+QString GTPRandomList::HomepageRandom()
+{
+    QString Result = "";
+    if (!_Impl->_homepageAuto.empty())
+    {
+        int i = _Impl->_homepageAuto.next();
+        if (i >=0 && i < _Impl->_lastStringList.size())
+        {
+            Result = _Impl->_lastStringList[i];
         }
     }
     return Result;
@@ -167,21 +160,97 @@ int GTPRandomList::RandomDataFontSize()
 
 int GTPRandomList::RandomDataProgress()
 {
-    int Result = 0;
-    if (_Impl->_lastI == -1)
+    return _Impl->_planAuto.getProgress();
+}
+
+void GTPRandomList::AutoRandomList::init(const int &num_, const bool &unlimit_)
+{
+    if (num_ > 0)
     {
-        Result = -1;
+        _cur = -1;
+        _unlimit = unlimit_;
+        int curRand = 0;
+        _list = QVector<int>(num_, -1);
+        for (int i = 0; i < num_; ++i)
+        {
+            srand(int(time(nullptr)) + _StaticSeed);
+            curRand = _StaticSeed = rand();
+            curRand %= num_;
+
+            if (curRand >= 0 && curRand < num_)
+            {
+                while (_list[curRand] != -1)
+                {
+                    curRand++;
+                    if (curRand == num_)
+                    {
+                        curRand = 0;
+                    }
+                }
+                _list[curRand] = i;
+            }
+        }
     }
-    else
+}
+
+void GTPRandomList::AutoRandomList::clear()
+{
+    _list.clear();
+    _cur = -1;
+    _unlimit = false;
+}
+
+int GTPRandomList::AutoRandomList::next()
+{
+    int Result = -1;
+    if (!_list.empty() && _cur >= -1)
     {
-        if (_Impl->_lastStringList.size() == _Impl->_lastI)
+        ++_cur;
+        if (_cur >= _list.size())
+        {
+            if (_unlimit)
+            {
+                init(_list.size(), true);
+                _cur = 0;
+            }
+            else
+            {
+                _cur = _list.size() - 1;
+            }
+        }
+        Result = _list[_cur];
+    }
+    return Result;
+}
+
+bool GTPRandomList::AutoRandomList::empty()
+{
+    return _list.empty();
+}
+
+int GTPRandomList::AutoRandomList::getProgress()
+{
+    int Result = -1;
+    if (!_list.empty() && _cur >= 0)
+    {
+        if (_list.size() == _cur + 1)
         {
             Result = 100;
         }
         else
         {
-            Result = (double)(_Impl->_lastI - 1) / (double)(_Impl->_lastStringList.size() - 1) * 100;
+            Result = (double)(_cur) / (double)(_list.size() - 1) * 100;
         }
+    }
+    return Result;
+}
+
+int GTPRandomList::AutoRandomList::getIndex()
+{
+    int Result = -1;
+    if (_cur >= 0 && _cur < _list.size())
+    {
+        Result = _list[_cur];
     }
     return Result;
 }
