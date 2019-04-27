@@ -8,3 +8,4 @@ build
 build*
 *.pro.user
 GTools/Info.plist
+ODWay/Info.plist

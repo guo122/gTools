@@ -1,0 +1,34 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>LauncherList.qml</file>
+        <file>SimpleLauncherDelegate.qml</file>
+        <file>TableTime.qml</file>
+        <file>Bar.qml</file>
+        <file>TableTimeAdd.qml</file>
+        <file>TableTimeList.qml</file>
+        <file>TableTimeSum.qml</file>
+        <file>TableTimeChart.qml</file>
+        <file>TableTimeChartList.qml</file>
+        <file>TableTimeChartSum.qml</file>
+        <file>TableGoblin.qml</file>
+        <file>TableGoblinAdd.qml</file>
+        <file>TableGoblinList.qml</file>
+        <file>TableGoblinAddBasic.qml</file>
+        <file>TableGoblinAddBill.qml</file>
+        <file>TableGoblinAddTransit.qml</file>
+        <file>TableGoblinAddGnome.qml</file>
+        <file>TableGoblinListCoin.qml</file>
+        <file>TableGoblinListGnome.qml</file>
+        <file>TableGoblinCoinEdit.qml</file>
+        <file>ODBox/Button.qml</file>
+        <file>ODBox/CKKPicker.qml</file>
+        <file>ODBox/ClassifyPicker.qml</file>
+        <file>ODBox/DateTimePicker.qml</file>
+        <file>ODBox/DigitalPicker.qml</file>
+        <file>ODBox/RowSpinBox.qml</file>
+        <file>ODBox/TextButton.qml</file>
+        <file>ODBox/TextButtonNoDouble.qml</file>
+        <file>TableEfg.qml</file>
+    </qresource>
+</RCC>
