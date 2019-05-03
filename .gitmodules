@@ -1,3 +1,6 @@
 [submodule "BuildScript"]
 	path = BuildScript
 	url = https://github.com/guo122/BuildScript
+[submodule "3rd/gBase"]
+	path = 3rd/gBase
+	url = https://github.com/guo122/gBase
