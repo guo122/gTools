@@ -1,0 +1,3 @@
+[submodule "BuildScript"]
+	path = BuildScript
+	url = https://github.com/guo122/BuildScript
