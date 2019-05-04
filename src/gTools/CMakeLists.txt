@@ -4,7 +4,8 @@ set(PROJECT_NAME gTools)
 set(CMAKE_C_COMPILER g++)
 add_compile_options(-std=c++1y)
 
-set(SRCROOT ${CMAKE_ROOT_DIR}/src)
+set(SRCROOT ${CMAKE_ROOT_DIR}/src/gTools)
+set(INCROOT ${CMAKE_ROOT_DIR}/include/gTools)
 
 #set(DIR_SRCS 
 #${SRCROOT}/main.mm
@@ -13,10 +14,14 @@ set(SRCROOT ${CMAKE_ROOT_DIR}/src)
 if(${THE_PROJECT_PREFIX}_OS_IOS)
     set(PLATFORM_SRC
 		${SRCROOT}/main.mm
-		${SRCROOT}/AppDelegate.h
+		${INCROOT}/AppDelegate.h
 		${SRCROOT}/AppDelegate.mm
-		${SRCROOT}/ViewController.h
+		${INCROOT}/ViewController.h
 		${SRCROOT}/ViewController.mm
+		${INCROOT}/TimeAddViewController.h
+		${SRCROOT}/TimeAddViewController.mm
+		${INCROOT}/TimeListViewController.h
+		${SRCROOT}/TimeListViewController.mm
     )
     source_group("ios" FILES ${PLATFORM_SRC})
 
@@ -28,10 +33,22 @@ if(${THE_PROJECT_PREFIX}_OS_IOS)
 endif()
 
 set(INC_DIR 
-    ${CMAKE_ROOT_DIR}/src
+    ${CMAKE_ROOT_DIR}/3rd/gBase/include
+    ${CMAKE_ROOT_DIR}/include
+	${INCROOT}
 )
 
 include_directories(${INC_DIR})
+
+set(LINK_LIBS
+	gBase
+	gToolsM
+	gToolsP
+)
+
+link_libraries(${LINK_LIBS})
+
+link_libraries("sqlite3")
 
 link_libraries("-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion" "-framework Metal" "-framework OpenGLES" "-framework OpenAL")
 

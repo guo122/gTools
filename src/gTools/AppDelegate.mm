@@ -6,6 +6,8 @@
 //  Copyright © 2019 John. All rights reserved.
 //
 
+#import <gToolsM/gToolsM.h>
+
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -17,6 +19,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    NSString *homePath = NSHomeDirectory();
+    gString dbPath =[homePath UTF8String];
+    dbPath += "/Documents/list.db";
+    
+    gToolsM::Instance(dbPath)->ReadDB();
     return YES;
 }
 

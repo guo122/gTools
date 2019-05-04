@@ -14,7 +14,9 @@ include(${CMAKE_ROOT_DIR}/BuildScript/cmake/Macros.cmake)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set_property(GLOBAL PROPERTY PREDEFINED_TARGETS_FOLDER "CMake")
 
-add_subdirectory("src")
+add_subdirectory("src/gTools")
+add_subdirectory("src/gToolsM")
+add_subdirectory("src/gToolsP")
 
 set(CMAKE_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/3rd/gBase")
 add_subdirectory("3rd/gBase/src")
