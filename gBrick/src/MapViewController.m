@@ -13,6 +13,9 @@
 @end
 
 @implementation MapViewController
+- (IBAction)aaaa:(UIButton *)sender {
+    NSLog(@"print...");
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
