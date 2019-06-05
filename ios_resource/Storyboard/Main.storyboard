@@ -10,26 +10,27 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Add-->
+        <!--Map-->
         <scene sceneID="tbT-RF-BGC">
             <objects>
-                <viewController id="ods-2m-bD1" customClass="TimeAddViewController" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xu5-dq-S4i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="ods-2m-bD1" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cBU-mp-1dV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="aVX-a4-DFj"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Add" id="SJ6-Ef-Bd6"/>
+                    <tabBarItem key="tabBarItem" title="Map" id="SJ6-Ef-Bd6"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xu5-dq-S4i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1362" y="-414"/>
         </scene>
-        <!--List-->
+        <!--Home-->
         <scene sceneID="VrQ-iW-3a3">
             <objects>
-                <viewController id="CRn-gi-9Ka" customClass="TimeListViewController" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mBm-ch-3yf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="CRn-gi-9Ka" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cpm-Py-rIQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,9 +47,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="KfJ-Gm-O0X"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="List" id="EBy-48-4UW"/>
+                    <tabBarItem key="tabBarItem" title="Home" id="EBy-48-4UW"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mBm-ch-3yf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1362.4000000000001" y="-1123.088455772114"/>
         </scene>

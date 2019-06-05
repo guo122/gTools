@@ -123,7 +123,7 @@ public:
 
 public:
     // TableTimeList
-    void GetCurList(StringList &list);
+    void GetCurList(StringList &list, const bool &fastMode_ = false);
     bool DelDurTime(const int &index_);
     bool CalDurTime(const int &index1_, const int &index2_, std::string &str_);
     bool GetPopList(const StringList &ckkList_, IntList &indexList_);

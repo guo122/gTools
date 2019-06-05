@@ -419,7 +419,7 @@ int ODPTime::getChartSumCurrentIndex()
     return -1;
 }
 
-void ODPTime::GetCurList(StringList &list)
+void ODPTime::GetCurList(StringList &list, const bool &fastMode_)
 {
     if (!_Impl->_expandData._dateList.empty())
     {
@@ -436,12 +436,15 @@ void ODPTime::GetCurList(StringList &list)
         list.push_back("");
         _Impl->_lastCurList.push_back(NULL);
         std::for_each(_Impl->_expandData._dayList[_Impl->_curDate]->_tipList.begin(), _Impl->_expandData._dayList[_Impl->_curDate]->_tipList.end(), [&](OneTipPtr &x){
-            tmpStr = ODTimeUtil::Timestamp2String(x->_time - x->_durationSecond, "%H:%M") + "-";
-            tmpStr += ODTimeUtil::Timestamp2String(x->_time, "%H:%M") + "(";
-            tmpStr += ODTimeUtil::Duration2String(x->_durationSecond) + "): ";
-            tmpStr += x->_classify + "_" + x->_kindFirst + "_" + x->_kindSecond;
-            list.push_back(tmpStr);
-            _Impl->_lastCurList.push_back(x);
+            if (x->_classify != "Idle" || !fastMode_)
+            {
+                tmpStr = ODTimeUtil::Timestamp2String(x->_time - x->_durationSecond, "%H:%M") + "-";
+                tmpStr += ODTimeUtil::Timestamp2String(x->_time, "%H:%M") + "(";
+                tmpStr += ODTimeUtil::Duration2String(x->_durationSecond) + "): ";
+                tmpStr += fastMode_?x->_kindFirst:x->_classify + "_" + x->_kindFirst + "_" + x->_kindSecond;
+                list.push_back(tmpStr);
+                _Impl->_lastCurList.push_back(x);
+            }
         });
     }
 }

@@ -28,3 +28,6 @@ build-ODWay*
 
 GTools/Info.plist
 ODWay/Info.plist
+
+gBrick/build
+gBrick/bin

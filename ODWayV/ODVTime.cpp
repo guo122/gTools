@@ -224,7 +224,7 @@ void ODVTime::setCurList(QStringList curList)
 void ODVTime::updateList()
 {
     StringList tmpList;
-    ODPTime::Instance()->GetCurList(tmpList);
+    ODPTime::Instance()->GetCurList(tmpList, true);
     m_curList.clear();
     std::for_each(tmpList.begin(), tmpList.end(), [&](std::string &x){
         m_curList.push_back(x.c_str());
