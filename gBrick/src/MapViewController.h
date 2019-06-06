@@ -1,15 +1,14 @@
 //
-//  ViewController.h
-//  ios_test
+//  MapViewController.h
+//  gBrick
 //
-//  Created by John on 2019/4/29.
+//  Created by guo122 on 2019/4/29.
 //  Copyright © 2019 John. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface MapViewController : UIViewController
-
 
 @end
 

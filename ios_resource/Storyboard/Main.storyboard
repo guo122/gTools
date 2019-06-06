@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Epe-oU-Ahd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Epe-oU-Ahd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,37 +13,45 @@
         <!--Map-->
         <scene sceneID="tbT-RF-BGC">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xu5-dq-S4i" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="ods-2m-bD1" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cBU-mp-1dV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C9W-Fs-isR">
+                            <mtkView contentMode="scaleToFill" fixedFrame="YES" colorPixelFormat="BGRA8Unorm" depthStencilPixelFormat="Invalid" translatesAutoresizingMaskIntoConstraints="NO" id="t4A-uI-dvx" customClass="MtkController">
+                                <rect key="frame" x="0.0" y="64" width="375" height="561"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mtkView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xq4-u6-5ue">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="I8B-4i-HhF">
+                                        <barButtonItem key="rightBarButtonItem" title="Add" id="w7c-vI-oQi">
+                                            <connections>
+                                                <action selector="BtnMapAdd:" destination="ods-2m-bD1" id="3wu-nT-QCn"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
                             </navigationBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6pj-W7-Ljx">
-                                <rect key="frame" x="329" y="27" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="+"/>
-                                <connections>
-                                    <action selector="aaaa:" destination="ods-2m-bD1" eventType="touchUpInside" id="gvc-v4-waq"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="aVX-a4-DFj"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" id="SJ6-Ef-Bd6"/>
+                    <connections>
+                        <outlet property="MtkMap" destination="t4A-uI-dvx" id="aBH-9B-jif"/>
+                        <outletCollection property="MtkMap" destination="t4A-uI-dvx" id="T4q-yZ-gCA"/>
+                    </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xu5-dq-S4i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1362.4000000000001" y="-414.24287856071965"/>
         </scene>
         <!--Home-->
         <scene sceneID="VrQ-iW-3a3">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mBm-ch-3yf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="CRn-gi-9Ka" customClass="HomeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cpm-Py-rIQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -63,6 +71,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" id="EBy-48-4UW"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mBm-ch-3yf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1362.4000000000001" y="-1123.088455772114"/>
         </scene>

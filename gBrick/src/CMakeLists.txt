@@ -14,10 +14,17 @@ set(DIR_SRCS
 	${SRCROOT}/HomeViewController.m
 	${SRCROOT}/MapViewController.h
 	${SRCROOT}/MapViewController.m
+	${SRCROOT}/MtkController.h
+	${SRCROOT}/MtkController.m
+	${SRCROOT}/gShaderTypes.h
 	${SRCROOT}/main.m
 )
 
-set(BUNDLE_SRCS
+set(SHADERS_SRCS
+	${SRCROOT}/../shaders/shaders.metal
+)
+
+set(BUNDLE_SRCS ${SHADERS_SRCS}
 	${RESROOT}/Info.plist
 	${COMMON_RESROOT}/Assets.xcassets
 	${COMMON_RESROOT}/Storyboard/LaunchScreen.storyboard

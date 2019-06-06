@@ -1,8 +1,8 @@
 //
 //  AppDelegate.h
-//  ios_test
+//  gBrick
 //
-//  Created by John on 2019/4/29.
+//  Created by guo122 on 2019/4/29.
 //  Copyright © 2019 John. All rights reserved.
 //
 
@@ -11,7 +11,6 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 
 @end
 
