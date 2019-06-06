@@ -12,7 +12,9 @@
 
 -(void) Init: (UIViewController*)ViewController;
 
--(void) DrawRect: (CGRect)bounds;
+-(void) DrawRect: (CGRect)bounds :(vector_uint4)color;
+
+-(vector_uint2) GetDrawableSize;
 
 @end
 

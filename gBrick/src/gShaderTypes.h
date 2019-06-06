@@ -5,7 +5,7 @@
 typedef struct
 {
     vector_float4 position;
-    vector_float2 textureCoordinate;
+    vector_float3 color;
 } GVertex;
 
 

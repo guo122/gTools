@@ -1,6 +1,9 @@
 
 set(PROJECTNAME gBrick)
 
+#set(CMAKE_C_COMPILER g++)
+#add_compile_options(-fno-objc-arc)
+
 set(SRCROOT ${CMAKE_CURRENT_LIST_DIR})
 set(INCROOT ${CMAKE_CURRENT_LIST_DIR})
 set(RESROOT ${CMAKE_CURRENT_LIST_DIR}/../res)
