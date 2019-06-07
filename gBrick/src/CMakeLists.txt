@@ -17,6 +17,8 @@ set(DIR_SRCS
 	${SRCROOT}/HomeViewController.m
 	${SRCROOT}/MapViewController.h
 	${SRCROOT}/MapViewController.m
+	${SRCROOT}/MapView.h
+	${SRCROOT}/MapView.m
 	${SRCROOT}/MtkController.h
 	${SRCROOT}/MtkController.m
 	${SRCROOT}/gShaderTypes.h

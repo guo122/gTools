@@ -24,7 +24,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     NSLog(@"[init] MapViewController init.");
     
     self.count = 0;
