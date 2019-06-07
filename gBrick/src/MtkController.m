@@ -11,21 +11,14 @@
 #import "gShaderTypes.h"
 #import "MtkController.h"
 
-typedef struct
-{
-    id<MTLBuffer> vertices;
-    NSUInteger numVertices;
-}Mesh;
-
 @interface MtkController ()
 
 @property (nonatomic, assign) vector_uint2 viewportSize;
 @property (nonatomic, strong) id<MTLRenderPipelineState> pipelineState;
 @property (nonatomic, strong) id<MTLCommandQueue> commandQueue;
 @property (nonatomic, strong) id<MTLTexture> texture;
-@property (nonatomic, strong) NSMutableArray * meshes;
-@property (nonatomic, strong) NSMutableArray<id<MTLBuffer>> * retainVertices;
-@property (nonatomic, strong) id<MTLBuffer> lastVertices;
+@property (nonatomic, strong) NSMutableArray<id<MTLBuffer>> * vertices;
+@property (nonatomic, strong) NSMutableArray * numVertices;
 
 @end
 
@@ -37,29 +30,33 @@ typedef struct
     self.delegate = self;
     self.viewportSize = (vector_uint2){self.drawableSize.width, self.drawableSize.height};
     
-    self.meshes = [[NSMutableArray alloc]init];
+    self.vertices = [[NSMutableArray alloc]init];
+    self.numVertices = [[NSMutableArray alloc]init];
     [self setupPipeline];
 }
 
 -(void) DrawRect: (CGRect)bounds :(vector_uint4)color
 {
-    GVertex quadVertices[] =
+//    GVertex gVertices[] =
+//    {
+//        {{bounds.origin.x, bounds.origin.y, 0.0, 1.0}, {color[0], color[1], color[2]}},
+//        {{bounds.origin.x, bounds.origin.y + bounds.size.width, 0.0, 1.0}, {color[0], color[1], color[2]}},
+//        {{bounds.origin.x + bounds.size.height, bounds.origin.y, 0.0, 1.0}, {color[0], color[1], color[2]}},
+//    };
+    GVertex gVertices[] =
     {
-        {{bounds.origin.x, bounds.origin.y, 0.0, 1.0}, {color[0], color[1], color[2]}},
-        {{bounds.origin.x, bounds.origin.y + bounds.size.width, 0.0, 1.0}, {color[0], color[1], color[2]}},
-        {{bounds.origin.x + bounds.size.height, bounds.origin.y, 0.0, 1.0}, {color[0], color[1], color[2]}},
+        {{-1.0, -1.0, 0.0, 1.0}, {color[0], color[1], color[2]}},
+        {{-1.0, 0.0 , 0.0, 1.0}, {color[0], color[1], color[2]}},
+        {{ 0.0, 0.0 , 0.0, 1.0}, {color[0], color[1], color[2]}},
     };
     
-    Mesh tmpMesh;
-    tmpMesh.vertices = [self.device newBufferWithBytes:quadVertices  length:sizeof(quadVertices) options:MTLResourceStorageModeShared];
-    //    [tmpMesh.vertices retain];
-    tmpMesh.numVertices = sizeof(quadVertices) / sizeof(GVertex);
+    id<MTLBuffer> vv = [self.device newBufferWithBytes:gVertices  length:sizeof(gVertices) options:MTLResourceStorageModeShared];
+    [self.vertices addObject:vv];
     
-    NSValue *tmpValue = [NSValue value: &tmpMesh withObjCType:@encode(Mesh)];
+    NSUInteger num = sizeof(gVertices) / sizeof(GVertex);
+    NSValue *tmpValue = [NSValue value: &num withObjCType:@encode(NSUInteger)];
     
-    [self.retainVertices addObject:tmpMesh.vertices];
-    [self.meshes addObject:tmpValue];
-    self.lastVertices = tmpMesh.vertices;
+    [self.numVertices addObject:tmpValue];
 }
 
 -(vector_uint2) GetDrawableSize
@@ -100,22 +97,21 @@ typedef struct
         id<MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor]; //编码绘制指令的Encoder
         [renderEncoder setViewport:(MTLViewport){0.0, 0.0, self.viewportSize.x, self.viewportSize.y, -1.0, 1.0 }]; // 设置显示区域
         
-        Mesh tmpMesh;
-        for (NSValue *cur in self.meshes)
+        NSUInteger i = 0;
+        NSUInteger tmpNum;
+        for (id<MTLBuffer> cur in self.vertices)
         {
-            [cur getValue:&tmpMesh];
-            
-            NSAssert(tmpMesh.vertices, @"vertices error");
+            [[self.numVertices objectAtIndex:i]getValue:&tmpNum];
             
             [renderEncoder setRenderPipelineState:self.pipelineState]; // 设置渲染管道，以保证顶点和片元两个shader会被调用
             
-            [renderEncoder setVertexBuffer:tmpMesh.vertices
+            [renderEncoder setVertexBuffer:cur
                                     offset:0
                                    atIndex:0]; // 设置顶点缓存
             
             [renderEncoder drawPrimitives:MTLPrimitiveTypeTriangle
                               vertexStart:0
-                              vertexCount:tmpMesh.numVertices]; // 绘制
+                              vertexCount:tmpNum]; // 绘制
             
         }
         [renderEncoder endEncoding]; // 结束
