@@ -31,7 +31,7 @@ set(BUNDLE_SRCS ${SHADERS_SRCS}
 	${RESROOT}/Info.plist
 	${COMMON_RESROOT}/Assets.xcassets
 	${COMMON_RESROOT}/Storyboard/LaunchScreen.storyboard
-	${COMMON_RESROOT}/Storyboard/Main.storyboard
+	${COMMON_RESROOT}/Storyboard/JustMetal.storyboard
 	${COMMON_RESROOT}/icn/icn_blue_add.png
 )
 

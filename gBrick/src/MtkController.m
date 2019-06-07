@@ -26,6 +26,8 @@
 
 -(void) Init: (UIViewController*)ViewController
 {
+    NSLog(@"[init] MtkController init.");
+    
     self.device = MTLCreateSystemDefaultDevice();
     self.delegate = self;
     self.viewportSize = (vector_uint2){self.drawableSize.width, self.drawableSize.height};
@@ -37,18 +39,35 @@
 
 -(void) DrawRect: (CGRect)bounds :(vector_uint4)color
 {
-//    GVertex gVertices[] =
-//    {
-//        {{bounds.origin.x, bounds.origin.y, 0.0, 1.0}, {color[0], color[1], color[2]}},
-//        {{bounds.origin.x, bounds.origin.y + bounds.size.width, 0.0, 1.0}, {color[0], color[1], color[2]}},
-//        {{bounds.origin.x + bounds.size.height, bounds.origin.y, 0.0, 1.0}, {color[0], color[1], color[2]}},
-//    };
+    CGFloat localX = ( 2 * bounds.origin.x ) - 1;
+    CGFloat localY = 1 - ( 2 * bounds.origin.y );
+    CGFloat localHeight = bounds.size.height * 2;
+    CGFloat localWidth = bounds.size.width * 2;
+    
     GVertex gVertices[] =
     {
-        {{-1.0, -1.0, 0.0, 1.0}, {color[0], color[1], color[2]}},
-        {{-1.0, 0.0 , 0.0, 1.0}, {color[0], color[1], color[2]}},
-        {{ 0.0, 0.0 , 0.0, 1.0}, {color[0], color[1], color[2]}},
+        {{ localX               , localY                , 0.0, 1.0}, {color[0], color[1], color[2]}},
+        {{ localX + localWidth  , localY                , 0.0, 1.0}, {color[0], color[1], color[2]}},
+        {{ localX               , localY - localHeight  , 0.0, 1.0}, {color[0], color[1], color[2]}},
+        
+        {{ localX + localWidth  , localY                , 0.0, 1.0}, {color[0], color[1], color[2]}},
+        {{ localX               , localY - localHeight  , 0.0, 1.0}, {color[0], color[1], color[2]}},
+        {{ localX + localWidth  , localY - localHeight  , 0.0, 1.0}, {color[0], color[1], color[2]}},
     };
+    
+//    int indices[] =
+//    {
+//        0, 3, 2,
+//        0, 1, 3,
+//        0, 2, 4,
+//        0, 4, 1,
+//        2, 3, 4,
+//        1, 4, 3,
+//    };
+//    self.indexs = [self.mtkView.device newBufferWithBytes:indices
+//                                                   length:sizeof(indices)
+//                                                  options:MTLResourceStorageModeShared];
+//    self.indexCount = sizeof(indices) / sizeof(int);
     
     id<MTLBuffer> vv = [self.device newBufferWithBytes:gVertices  length:sizeof(gVertices) options:MTLResourceStorageModeShared];
     [self.vertices addObject:vv];

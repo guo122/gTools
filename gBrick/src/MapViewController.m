@@ -13,9 +13,8 @@
 #import "MapViewController.h"
 
 @interface MapViewController ()
-- (IBAction)BtnMapAdd:(id)sender;
 
-@property (strong, nonatomic) IBOutlet MtkController *MtkMap;
+@property (weak, nonatomic) IBOutlet MtkController *MtkMap;
 
 @property float count;
 
@@ -25,25 +24,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"[init] MapViewController init.");
+    
     self.count = 0;
     [self.MtkMap Init:self];
+    
+    for (int i = 0; i < 10; i++ )
+    {
+        CGRect tmpRect;
+        tmpRect.origin.x = self.count;
+        tmpRect.origin.y = self.count;
+        tmpRect.size.height = 0.1;
+        tmpRect.size.width = 0.1;
+        
+        vector_uint4 tmpC = {1.0, 1.0, 1.0, 1.0};
+        
+        [self.MtkMap DrawRect:tmpRect :tmpC ];
+        
+        self.count += 0.1;
+    }
+
 }
 
-- (IBAction)BtnMapAdd:(id)sender {
-    NSLog(@"Map Add");
-    vector_uint2 size = self.MtkMap.GetDrawableSize;
-    NSLog(@"%i, %i", size[0], size[1]);
-    
-    CGRect tmpRect;
-    tmpRect.origin.x = 0 + self.count;
-    tmpRect.origin.y = 0 + self.count;
-    tmpRect.size.height = 0.5;
-    tmpRect.size.width = 0.5;
-    
-    vector_uint4 tmpC = {1.0, 1.0, 1.0, 1.0};
-    
-    [self.MtkMap DrawRect:tmpRect :tmpC ];
-    
-    self.count += 0.1;
-}
 @end
