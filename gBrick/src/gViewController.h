@@ -10,5 +10,6 @@
 
 @interface GViewController : UIViewController
 
+-(void) Render;
 @end
 

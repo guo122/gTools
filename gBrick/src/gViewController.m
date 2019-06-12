@@ -43,8 +43,11 @@
 
         self.count += 0.1;
     }
+}
 
-
+-(void) Render
+{
+    [self.MtkMap Render];
 }
 
 @end

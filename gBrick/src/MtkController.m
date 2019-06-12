@@ -154,7 +154,7 @@
 
             [renderEncoder setRenderPipelineState:self.pipelineState]; // 设置渲染管道，以保证顶点和片元两个shader会被调用
 
-            [self setupMatrixWithEncoder:renderEncoder];
+//            [self setupMatrixWithEncoder:renderEncoder];
 
             [renderEncoder setVertexBuffer:cur
                                     offset:0
