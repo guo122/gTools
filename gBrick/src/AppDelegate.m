@@ -14,10 +14,19 @@
 
 @implementation AppDelegate
 
+- (void)runUserThread:(NSDictionary *)launchOptions {
+    while (true) {
+        usleep(100000);
+        NSLog(@"Tick...");
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-
+    
+    NSThread* thread = [[NSThread alloc] initWithTarget:self selector:@selector(runUserThread:) object:launchOptions];
+    [thread setStackSize:8 * 1024 * 1024];
+    [thread start];
     return YES;
 }
 
