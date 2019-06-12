@@ -1,5 +1,5 @@
 //
-//  MapView.h
+//  gView.h
 //  gBrick
 //
 //  Created by guo122 on 2019/6/7.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MapView : UIView
+@interface GView : UIView
 
 @end
 

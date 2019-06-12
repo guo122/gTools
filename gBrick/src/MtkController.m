@@ -35,7 +35,6 @@
     self.framebufferOnly = true;
     self.vc = ViewController;
     self.device = MTLCreateSystemDefaultDevice();
-    self.delegate = self;
     self.viewportSize = (vector_uint2){self.drawableSize.width, self.drawableSize.height};
     
     self.indices = [[NSMutableArray alloc]init];
@@ -115,7 +114,7 @@
 
     x += 0.1;
 
-    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, x, 1, 0, 0);
+    modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, x, 0, 1, 0);
     modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, y, 0, 1, 0);
     modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, z, 0, 0, 1);
 
@@ -133,10 +132,10 @@
     self.viewportSize = (vector_uint2){size.width, size.height};
 }
 
-- (void)drawInMTKView:(MTKView *)view
+-(void) Render
 {
     id<MTLCommandBuffer> commandBuffer = [self.commandQueue commandBuffer];
-    MTLRenderPassDescriptor *renderPassDescriptor = view.currentRenderPassDescriptor;
+    MTLRenderPassDescriptor *renderPassDescriptor = self.currentRenderPassDescriptor;
 
     if(renderPassDescriptor != nil)
     {
@@ -171,7 +170,7 @@
         }
         [renderEncoder endEncoding]; // 结束
 
-        [commandBuffer presentDrawable:view.currentDrawable]; // 显示
+        [commandBuffer presentDrawable:self.currentDrawable]; // 显示
 
     }
 

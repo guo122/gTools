@@ -1,5 +1,5 @@
 //
-//  MapView.m
+//  gView.m
 //  gBrick
 //
 //  Created by guo122 on 2019/6/7.
@@ -7,15 +7,15 @@
 //
 
 
-#import "MapView.h"
+#import "gView.h"
 
-@interface MapView ()
+@interface GView ()
 
 @property (nonatomic) NSMutableArray* touches;
 
 @end
 
-@implementation MapView
+@implementation GView
 
 ////////////////////////////////////////////////////////////
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event

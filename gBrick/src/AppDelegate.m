@@ -24,6 +24,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    self.window = [[UIWindow alloc]initWithFrame:
+                   [[UIScreen mainScreen]bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    self.vc = [[GViewController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:self.vc];
+    [nav setNavigationBarHidden:YES animated:YES];
+    
+    [self.window setRootViewController:nav];
+    [self.window makeKeyAndVisible];
+    
     NSThread* thread = [[NSThread alloc] initWithTarget:self selector:@selector(runUserThread:) object:launchOptions];
     [thread setStackSize:8 * 1024 * 1024];
     [thread start];
@@ -57,5 +68,9 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
++ (AppDelegate*)Instance
+{
+    return (AppDelegate*)[UIApplication sharedApplication].delegate;
+}
 
 @end

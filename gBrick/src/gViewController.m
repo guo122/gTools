@@ -1,5 +1,5 @@
 //
-//  MapViewController.m
+//  gViewController.m
 //  gBrick
 //
 //  Created by guo122 on 2019/4/29.
@@ -10,9 +10,9 @@
 
 #import "MtkController.h"
 
-#import "MapViewController.h"
+#import "gViewController.h"
 
-@interface MapViewController ()
+@interface GViewController ()
 
 @property (weak, nonatomic) IBOutlet MtkController *MtkMap;
 
@@ -20,16 +20,16 @@
 
 @end
 
-@implementation MapViewController
+@implementation GViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"[init] MapViewController init.");
     
-    self.count = 0;
+    self.count = 0.5;
     [self.MtkMap Init:self];
 
-    for (int i = 0; i < 10; i++ )
+    for (int i = 0; i < 1; i++ )
     {
         CGRect tmpRect;
         tmpRect.origin.x = self.count;

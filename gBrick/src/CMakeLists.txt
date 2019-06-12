@@ -13,12 +13,10 @@ set(BIN_DIR ${CMAKE_ROOT_DIR}/bin)
 set(DIR_SRCS 
 	${SRCROOT}/AppDelegate.h
 	${SRCROOT}/AppDelegate.m
-	${SRCROOT}/HomeViewController.h
-	${SRCROOT}/HomeViewController.m
-	${SRCROOT}/MapViewController.h
-	${SRCROOT}/MapViewController.m
-	${SRCROOT}/MapView.h
-	${SRCROOT}/MapView.m
+	${SRCROOT}/gViewController.h
+	${SRCROOT}/gViewController.m
+	${SRCROOT}/gView.h
+	${SRCROOT}/gView.m
 	${SRCROOT}/MtkController.h
 	${SRCROOT}/MtkController.m
 	${SRCROOT}/gShaderTypes.h

@@ -1,5 +1,5 @@
 //
-//  MapViewController.h
+//  gViewController.h
 //  gBrick
 //
 //  Created by guo122 on 2019/4/29.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MapViewController : UIViewController
+@interface GViewController : UIViewController
 
 @end
 
