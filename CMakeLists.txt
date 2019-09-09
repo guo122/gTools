@@ -20,4 +20,5 @@ add_subdirectory("src/gToolsP")
 
 set(CMAKE_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/3rd/gBase")
 add_subdirectory("3rd/gBase/src")
+add_subdirectory("3rd/sqlite3")
 

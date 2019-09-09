@@ -17,6 +17,7 @@ set(DIR_SRCS
 set(INC_DIR 
     ${CMAKE_ROOT_DIR}/3rd/gBase/include
     ${CMAKE_ROOT_DIR}/include
+	${CMAKE_ROOT_DIR}/3rd/sqlite3
 	${INCROOT}
 )
 

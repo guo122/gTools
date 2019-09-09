@@ -30,11 +30,16 @@ if(${THE_PROJECT_PREFIX}_OS_IOS)
 		${CMAKE_ROOT_DIR}/ios_resource/Storyboard/LaunchScreen.storyboard
 		${CMAKE_ROOT_DIR}/ios_resource/Storyboard/Main.storyboard
 	)
+elseif(${THE_PROJECT_PREFIX}_OS_WINDOWS)
+	set(DIR_SRCS 
+		${SRCROOT}/main.cpp
+	)
 endif()
 
 set(INC_DIR 
     ${CMAKE_ROOT_DIR}/3rd/gBase/include
     ${CMAKE_ROOT_DIR}/include
+	${CMAKE_ROOT_DIR}/3rd/sqlite3
 	${INCROOT}
 )
 
@@ -50,6 +55,7 @@ link_libraries(${LINK_LIBS})
 
 link_libraries("sqlite3")
 
+if(${THE_PROJECT_PREFIX}_OS_IOS)
 link_libraries("-framework Foundation" "-framework UIKit" "-framework CoreGraphics" "-framework QuartzCore" "-framework CoreMotion" "-framework Metal" "-framework OpenGLES" "-framework OpenAL")
 
 add_executable_macro(
@@ -74,3 +80,9 @@ set_target_properties(
 	XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer"
 	XCODE_ATTRIBUTE_TARGETED_DEVICE_FAMILY "1"
 )
+elseif(${THE_PROJECT_PREFIX}_OS_WINDOWS)
+add_executable_macro(
+                ${PROJECT_NAME}
+                SOURCES ${DIR_SRCS} 
+)
+endif()
